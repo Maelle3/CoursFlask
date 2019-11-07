@@ -1,0 +1,24 @@
+body {
+    color: #0095B6;
+    background-color: #EEEEEE;
+}
+
+h1{
+    font-size: 36px;
+    color: #17657D;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Helvetica", "Arial", sans-serif;
+}
+ul {
+    list-style-type: circle;
+}
+
+ol {
+    list-style-type: lower-roman;
+}
+
+p {
+    text-align: left;
+}

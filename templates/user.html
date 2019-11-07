@@ -1,12 +1,26 @@
 
-<html>
+{% extends "bootstrap/base.html" %}
+{% block html_attribs %} lang="en"{% endblock %}
 
-<head>
-    <title>FLASK TEST</title>
-</head>
 
-<body>
-    <h1>Hello, {{name}}</h1>
-</body>
 
-</html>
+{% block title %}Flask Test{% endblock %}
+{% block head %}Cours Flask
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename="styles.css")}}">
+{% endblock %}
+{% endblock%}
+
+
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
+
+{% block content %}
+  <h1>Hello, {{name}}</h1>
+{% endblock %}
