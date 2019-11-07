@@ -28,6 +28,7 @@ from flask import Flask
 #     response = client.get("/user/adrien")
 #     template = app.jinja_env.get_template('user.html')
 #     assert template.render(name="adrien") == response.get_data(as_text=True)
+from tasks.tests.factories import TaskFactory
 
 
 def test_app(app):
@@ -67,3 +68,10 @@ def test_user_view_uses_correct_template(client, captured_templates, user_name):
 def test_professor_view(app, client):
     response = client.get("/professor")
     assert response.json["name"] == "Adrien"
+
+def test_todoz(app, client, db_session):
+    task = TaskFactory()
+    db_session.commit()
+
+    response = client.get("/todoz")
+    assert len(response.json["results"]) > 0
