@@ -16,8 +16,18 @@ def test_index_route():
     assert "ECM" in response.data.decode("utf-8")
 
 
+def test_index_user():
+    client = app.test_client()
+    response = client.get("/user/adrien")
+    assert response.status_code == 200
+    result = response.data.decode("utf-8")
+    assert "Hello, adrien" in result
+
+
 def test_user_template():
     client = app.test_client()
     response = client.get("/user/adrien")
     template = app.jinja_env.get_template('user.html')
     assert template.render(name="adrien") == response.get_data(as_text=True)
+
+
