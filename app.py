@@ -1,5 +1,17 @@
+
+import os
+
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
+from flask_migrate import Migrate, MigrateCommand
+from flask_sqlalchemy import SQLAlchemy
+
+
+
+
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+db = SQLAlchemy()
 
 
 def create_app():
@@ -24,4 +36,13 @@ def create_app():
             "friends": ["Amadou", "Mariam"]
         }
 
+    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(basedir, 'data.sqlite')}"
+    app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+
+    db.init_app(app)
+    from tasks.models import Task
+    migrate = Migrate(app, db)
+
     return app
+
+
